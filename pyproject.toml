@@ -1,0 +1,56 @@
+[project]
+name = "tj"
+version = "0.1"
+requires-python = ">=3.10"
+description = "Time Journal"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Paul Jimenez", email = "pj@place.org"}
+]
+classifiers = [ 
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'Intended Audience :: End Users/Desktop',
+    'Intended Audience :: System Administrators',
+    'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'Natural Language :: English',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: Implementation :: CPython',
+    'Topic :: Communications :: Email :: Email Clients (MUA)',
+]
+dependencies = [
+    "click",
+]
+
+[project.urls]
+Homepage = "http://github.com/pjz/tj"
+Repository = "http://github.com/pjz/tj.git"
+
+[project.gui-scripts]
+tj = 'tj.cli:main'
+
+[project.optional-dependencies]
+dev = [
+    "mock",
+    "twine",
+    "pytest",
+    "pytest-cov",
+    "pytest-mypy",
+    "pytest-pylint",
+    "pytest-timeout",
+    "pytest-runfailed",
+]
+
+[mypy]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 160
+target-version = ['py310']
+skip-string-normalization = true
+quiet = true

@@ -1,0 +1,12 @@
+*.pyc
+*.egg-info
+__pycache__
+/build
+/dist
+/env
+/tests/.pytest
+.ropeproject/
+.cache/
+.pip_syncd
+.make-*
+.coverage
