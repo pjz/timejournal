@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import shutil
 import logging
 from types import SimpleNamespace
 from datetime import datetime
@@ -60,13 +61,13 @@ def next_journal_path() -> Path:
 def edit_journal(context, filename: Path | str) -> None:
     '''internal common code for comp/repl/dist/medit'''
     editor = context.obj.editor
+    template = context.obj.template
+    if template and not Path(filename).exists():
+        shutil.copyfile(template, filename)
     try:
         _ = os.system(f"{editor} {filename}")
     except Exception as e:
         print(f"Exception editing {filename}: {e}", file=sys.stderr)
-
-
-
 
 
 @click.group
@@ -80,22 +81,23 @@ def cli(ctx, editor, debug, entryspec):
     Helps keep journal entries with time-based names.
     For now they're hard-coded to YYYYmmdd
     """
-    global _cur_entry_name
-
     ctx.ensure_object(SimpleNamespace)
-    ctx.obj.debug = debug
+
     env = os.environ
     ctx.obj.editor = editor or env.get('VISUAL') or env.get('EDITOR')
+
+    ctx.obj.debug = debug
     if debug:
         logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
         logger.setLevel(logging.DEBUG)
 
+    # override this global so it's easily available to all commands
     def _make_entry_name() -> str:
         return datetime.now().strftime(entryspec)
-
+    global _cur_entry_name
     _cur_entry_name = _make_entry_name
 
-
+    ctx.obj.template = None
 
 @cli.command()
 @click.option('-e', '--editor', help="Editor to use")

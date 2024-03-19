@@ -14,6 +14,20 @@ Alas, the simplicity didn't survive so well, but hopefully this is an improvemen
 
 It's written using [click], with lots of docstrings, so `tj --help` should get you quite far.
 
+# TODO:
+
+  * [ ] dynamic templates to substitute in the entryname, as well as ... ?
+  * search infra
+      * [ ] `reindex` command to (re)build a full-text index on specified file (or all)
+      * [ ] `autoindex` flag to automatically add `new`/`edit`ed entries to the index
+      * [ ] have `search` use the index
+  * search output
+      * [x] matching filenames
+      * [ ] N context lines on each side (default: 1 or 2)
+      * [ ] headers upward through the tree
+        * [ ] ..and full containing section
+      * [ ] `--latest` show only latest (default 10) matches
+  * `tags` command to list all tags
 
 ---
 [click]: https://click.palletsprojects.com
