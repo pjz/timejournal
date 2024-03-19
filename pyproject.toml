@@ -1,6 +1,6 @@
 [project]
-name = "tj"
-version = "0.1"
+name = "timejournal"
+version = "0.2"
 requires-python = ">=3.10"
 description = "Time Journal"
 readme = "README.md"
@@ -28,11 +28,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "http://github.com/pjz/tj"
-Repository = "http://github.com/pjz/tj.git"
+Homepage = "http://github.com/pjz/timejournal"
+Repository = "http://github.com/pjz/timejournal.git"
 
 [project.gui-scripts]
-tj = 'tj.cli:main'
+tj = 'timejournal.cli:main'
 
 [project.optional-dependencies]
 dev = [

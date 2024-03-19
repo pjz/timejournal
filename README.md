@@ -1,4 +1,4 @@
-# TJ - the Time Journal
+# Time Journal (aka tj)
 
 ...it came to me in a dream...
 
@@ -8,7 +8,7 @@ Alas, the simplicity didn't survive so well, but hopefully this is an improvemen
 
 ## Installation
 
-`pip install tj` should work eventually.  For now you might need to do `pip install git+https://github.com/pjz/tj.git`
+`pip install timejournal` should work eventually.  For now you might need to do `pip install git+https://github.com/pjz/timejournal.git`
 
 ## Usage
 
