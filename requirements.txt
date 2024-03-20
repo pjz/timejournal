@@ -5,4 +5,4 @@
 #    pip-compile --output-file=requirements.txt pyproject.toml
 #
 click==8.1.7
-    # via tj (pyproject.toml)
+    # via timejournal (pyproject.toml)

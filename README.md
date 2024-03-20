@@ -8,7 +8,7 @@ Alas, the simplicity didn't survive so well, but hopefully this is an improvemen
 
 ## Installation
 
-`pip install timejournal` should work eventually.  For now you might need to do `pip install git+https://github.com/pjz/timejournal.git`
+Pypi has the latest version, so installation via `pip` or `pipx` should work.
 
 ## Usage
 
@@ -24,7 +24,7 @@ It's written using [click], with lots of docstrings, so `tj --help` should get y
   * search output
       * [x] matching filenames
       * [ ] N context lines on each side (default: 1 or 2)
-      * [ ] headers upward through the tree
+      * [x] headers upward through the tree
         * [ ] ..and full containing section
       * [ ] `--latest` show only latest (default 10) matches
   * `tags` command to list all tags

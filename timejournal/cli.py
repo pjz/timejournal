@@ -120,9 +120,30 @@ def edit(ctx):
     edit_journal(ctx, cur)
 
 
+HEADER_PATTERN = re.compile(r'^\s*(#+)\s*(.*)\s*#*\s*$')
+
+
+def headers_and_match(text: str, matcher: re.Pattern) -> list[str]:
+
+    result = []
+    headers = [''] * 100
+    for line in text.splitlines():
+        s = HEADER_PATTERN.match(line)
+        if s:
+            depth, header = len(s.group(1)), s.group(2)
+            headers[depth] = header
+        elif matcher.search(line):
+            result.extend([h for h in headers if h])
+            result.append(line)
+
+    return result
+
+
 @cli.command()
-@click.argument('keyword', nargs=-1)
-def search(keyword):
+@click.option('-l', '--listfiles', is_flag=True, help="Show just the list of matching files")
+@click.option('-s', '--sections', is_flag=True, help="Show the section headers up to each match")
+@click.argument('keyword', nargs=-1, required=True)
+def search(keyword, listfiles, sections):
     """
     Search journal for keywords.  By convention tags are '@tagname'.
     For now just prints out the matching filenames.
@@ -131,15 +152,19 @@ def search(keyword):
 
     entries = _base_journal_path().rglob('*.md')
 
-    pattern = '(' + '|'.join(keyword) + ')'
-    kws = re.compile(pattern)
+    kw_re = '(' + '|'.join(keyword) + ')'
+    kw_pattern = re.compile(kw_re)
 
-    matches = []
     for entryfile in entries:
         with open(entryfile) as f:
-            if kws.search(f.read()):
-                matches.append(entryfile)
+            text = f.read()
+            if not kw_pattern.search(text):
+                continue
+            if listfiles:
                 print(entryfile)
+            elif sections:
+                print(*headers_and_match(text, kw_pattern))
+
 
 
 @cli.command()
