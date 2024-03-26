@@ -17,6 +17,7 @@ It's written using [click], with lots of docstrings, so `tj --help` should get y
 # TODO:
 
   * [ ] dynamic templates to substitute in the entryname, as well as ... ?
+  * [x] cd to the basedir before running editor (makes editor search better)
   * search infra
       * [ ] `reindex` command to (re)build a full-text index on specified file (or all)
       * [ ] `autoindex` flag to automatically add `new`/`edit`ed entries to the index

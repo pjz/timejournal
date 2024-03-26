@@ -40,6 +40,13 @@ def current_journal_path() -> Path:
     return latest
 
 
+def cd_basedir():
+    '''
+    chdir to the basedir to help $EDITORs
+    '''
+    os.chdir(current_journal_path().parent)
+
+
 def next_journal_path() -> Path:
     """
     return the Path of a new journal entry
@@ -60,6 +67,7 @@ def next_journal_path() -> Path:
 
 def edit_journal(context, filename: Path | str) -> None:
     '''internal common code for comp/repl/dist/medit'''
+    cd_basedir()
     editor = context.obj.editor
     template = context.obj.template
     if template and not Path(filename).exists():
@@ -178,7 +186,9 @@ def basedir(ctx):
 
 
 def main():
+    cwd = Path.cwd()
     cli(auto_envvar_prefix='TJ')
+    os.chdir(cwd)
 
 
 if __name__ == '__main__':
